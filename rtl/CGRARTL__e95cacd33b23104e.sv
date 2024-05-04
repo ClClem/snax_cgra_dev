@@ -16,13 +16,14 @@
 /* verilator lint_off UNUSED */
 /* verilator lint_off UNOPTFLAT */
 ///* veriletor lint_off LATCH */
-module RegisterFile__4181a910cefd22ac
-(
-  input  logic [0:0] clk ,
-  input  logic [6:0] raddr [0:3],
+module RegisterFile__4181a910cefd22ac#(
+parameter int unsigned TCDMAddrWidth = 6
+)(
+  input  clk ,
+  input  logic [TCDMAddrWidth-1:0] raddr [0:3],
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 rdata [0:3],
   input  logic [0:0] reset ,
-  input  logic [6:0] waddr [0:7],
+  input  logic [TCDMAddrWidth-1:0] waddr [0:7],
   input  CGRAData_16_1_1__payload_16__predicate_1__bypass_1 wdata [0:7],
   input  logic [0:0] wen [0:7]
 );
@@ -64,15 +65,16 @@ endmodule
 // Full name: DataMemRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__data_mem_size_100__rd_ports_4__wr_ports_4__preload_data_[CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0001),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0002),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0003),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0004),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0005),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0006),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0007),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0008),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0009),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0010),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0011),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0012),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0013),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0014),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0015),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0016),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0017),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0018),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0019),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0020),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0021),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0022),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0023),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0024),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0025),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0026),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0027),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0028),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0029),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0030),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0031),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0032),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0033),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0034),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0035),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0036),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0037),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0038),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0039),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0040),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0041),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0042),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0043),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0044),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0045),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0046),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0047),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0048),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0049),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0050),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0051),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0052),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0053),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0054),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0055),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0056),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0057),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0058),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0059),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0060),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0061),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0062),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0063),Bits1(0x1),Bits1(0x0))]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/mem/data/DataMemRTL.py
 
-module DataMemRTL__b41b35d1723673b4
-(
+module DataMemRTL__b41b35d1723673b4#(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [0:0] reset ,
   input logic [0:0] recv_raddr__en [0:3] ,
-  input logic [6:0] recv_raddr__msg [0:3] ,
+  input logic [TCDMAddrWidth-1:0] recv_raddr__msg [0:3] ,
   output logic [0:0] recv_raddr__rdy [0:3] ,
   input logic [0:0] recv_waddr__en [0:3] ,
-  input logic [6:0] recv_waddr__msg [0:3] ,
+  input logic [TCDMAddrWidth-1:0] recv_waddr__msg [0:3] ,
   output logic [0:0] recv_waddr__rdy [0:3] ,
   input logic [0:0] recv_wdata__en [0:3] ,
   input CGRAData_16_1_1__payload_16__predicate_1__bypass_1 recv_wdata__msg [0:3] ,
@@ -94,10 +96,10 @@ module DataMemRTL__b41b35d1723673b4
   //-------------------------------------------------------------
 
   logic [0:0] reg_file__clk;
-  logic [6:0] reg_file__raddr [0:3];
+  logic [TCDMAddrWidth-1:0] reg_file__raddr [0:3];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 reg_file__rdata [0:3];
   logic [0:0] reg_file__reset;
-  logic [6:0] reg_file__waddr [0:7];
+  logic [TCDMAddrWidth-1:0] reg_file__waddr [0:7];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 reg_file__wdata [0:7];
   logic [0:0] reg_file__wen [0:7];
 
@@ -1312,8 +1314,9 @@ endmodule
 // Full name: PhiRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/PhiRTL.py
 
-module PhiRTL__f8a032dec339975b
-(
+module PhiRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -1336,10 +1339,10 @@ module PhiRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -1583,8 +1586,9 @@ endmodule
 // Full name: AdderRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/AdderRTL.py
 
-module AdderRTL__f8a032dec339975b
-(
+module AdderRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -1607,10 +1611,10 @@ module AdderRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -1839,8 +1843,9 @@ endmodule
 // Full name: CompRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/CompRTL.py
 
-module CompRTL__f8a032dec339975b
-(
+module CompRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -1863,10 +1868,10 @@ module CompRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -2104,8 +2109,9 @@ endmodule
 // Full name: MulRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/MulRTL.py
 
-module MulRTL__f8a032dec339975b
-(
+module MulRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -2128,10 +2134,10 @@ module MulRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -2334,8 +2340,9 @@ endmodule
 // Full name: BranchRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/BranchRTL.py
 
-module BranchRTL__f8a032dec339975b
-(
+module BranchRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -2358,10 +2365,10 @@ module BranchRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -2582,8 +2589,9 @@ endmodule
 // Full name: MemUnitRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/single/MemUnitRTL.py
 
-module MemUnitRTL__f8a032dec339975b
-(
+module MemUnitRTL__f8a032dec339975b #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -2606,10 +2614,10 @@ module MemUnitRTL__f8a032dec339975b
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -2822,8 +2830,9 @@ endmodule
 // Full name: FlexibleFuRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__num_inports_4__num_outports_2__data_mem_size_100__FuList_[<class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/fu/flexible/FlexibleFuRTL.py
 
-module FlexibleFuRTL__91aabf4745f968b9
-(
+module FlexibleFuRTL__91aabf4745f968b9 #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [1:0] recv_in_count [0:3],
   input  logic [0:0] reset ,
@@ -2846,10 +2855,10 @@ module FlexibleFuRTL__91aabf4745f968b9
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_out__msg [0:1] ,
   input logic [0:0] send_out__rdy [0:1] ,
   output logic [0:0] to_mem_raddr__en [0:5] ,
-  output logic [6:0] to_mem_raddr__msg [0:5] ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg [0:5] ,
   input logic [0:0] to_mem_raddr__rdy [0:5] ,
   output logic [0:0] to_mem_waddr__en [0:5] ,
-  output logic [6:0] to_mem_waddr__msg [0:5] ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg [0:5] ,
   input logic [0:0] to_mem_waddr__rdy [0:5] ,
   output logic [0:0] to_mem_wdata__en [0:5] ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg [0:5] ,
@@ -2887,17 +2896,18 @@ module FlexibleFuRTL__91aabf4745f968b9
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 fu__send_out__msg [0:5][0:1];
   logic [0:0] fu__send_out__rdy [0:5][0:1];
   logic [0:0] fu__to_mem_raddr__en [0:5];
-  logic [6:0] fu__to_mem_raddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] fu__to_mem_raddr__msg [0:5];
   logic [0:0] fu__to_mem_raddr__rdy [0:5];
   logic [0:0] fu__to_mem_waddr__en [0:5];
-  logic [6:0] fu__to_mem_waddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] fu__to_mem_waddr__msg [0:5];
   logic [0:0] fu__to_mem_waddr__rdy [0:5];
   logic [0:0] fu__to_mem_wdata__en [0:5];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 fu__to_mem_wdata__msg [0:5];
   logic [0:0] fu__to_mem_wdata__rdy [0:5];
 
-  PhiRTL__f8a032dec339975b fu__0
-  (
+  PhiRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)fu__0  (
     .clk( fu__clk[0] ),
     .recv_in_count( fu__recv_in_count[0] ),
     .reset( fu__reset[0] ),
@@ -2930,8 +2940,9 @@ module FlexibleFuRTL__91aabf4745f968b9
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[0] )
   );
 
-  AdderRTL__f8a032dec339975b fu__1
-  (
+  AdderRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)fu__1  (
     .clk( fu__clk[1] ),
     .recv_in_count( fu__recv_in_count[1] ),
     .reset( fu__reset[1] ),
@@ -2964,8 +2975,9 @@ module FlexibleFuRTL__91aabf4745f968b9
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[1] )
   );
 
-  CompRTL__f8a032dec339975b fu__2
-  (
+  CompRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)fu__2  (
     .clk( fu__clk[2] ),
     .recv_in_count( fu__recv_in_count[2] ),
     .reset( fu__reset[2] ),
@@ -2998,8 +3010,9 @@ module FlexibleFuRTL__91aabf4745f968b9
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[2] )
   );
 
-  MulRTL__f8a032dec339975b fu__3
-  (
+  MulRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+) fu__3  (
     .clk( fu__clk[3] ),
     .recv_in_count( fu__recv_in_count[3] ),
     .reset( fu__reset[3] ),
@@ -3032,8 +3045,9 @@ module FlexibleFuRTL__91aabf4745f968b9
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[3] )
   );
 
-  BranchRTL__f8a032dec339975b fu__4
-  (
+  BranchRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)fu__4  (
     .clk( fu__clk[4] ),
     .recv_in_count( fu__recv_in_count[4] ),
     .reset( fu__reset[4] ),
@@ -3066,8 +3080,9 @@ module FlexibleFuRTL__91aabf4745f968b9
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[4] )
   );
 
-  MemUnitRTL__f8a032dec339975b fu__5
-  (
+  MemUnitRTL__f8a032dec339975b #(
+.TCDMAddrWidth(TCDMAddrWidth)
+) fu__5  (
     .clk( fu__clk[5] ),
     .recv_in_count( fu__recv_in_count[5] ),
     .reset( fu__reset[5] ),
@@ -3570,8 +3585,9 @@ endmodule
 // Full name: TileRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__ctrl_mem_size_4__data_mem_size_100__num_ctrl_4__total_steps_140__num_fu_inports_4__num_fu_outports_2__num_connect_inports_4__num_connect_outports_4__Fu_FlexibleFuRTL__FuList_[<class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>]__const_list_[CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/tile/TileRTL.py
 
-module TileRTL__c49ddb6cf72af7d2
-(
+module TileRTL__c49ddb6cf72af7d2 #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [0:0] reset ,
   input logic [0:0] from_mem_rdata__en  ,
@@ -3590,10 +3606,10 @@ module TileRTL__c49ddb6cf72af7d2
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_data__msg [0:3] ,
   input logic [0:0] send_data__rdy [0:3] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -3846,17 +3862,18 @@ module TileRTL__c49ddb6cf72af7d2
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__send_out__msg [0:1];
   logic [0:0] element__send_out__rdy [0:1];
   logic [0:0] element__to_mem_raddr__en [0:5];
-  logic [6:0] element__to_mem_raddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_raddr__msg [0:5];
   logic [0:0] element__to_mem_raddr__rdy [0:5];
   logic [0:0] element__to_mem_waddr__en [0:5];
-  logic [6:0] element__to_mem_waddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_waddr__msg [0:5];
   logic [0:0] element__to_mem_waddr__rdy [0:5];
   logic [0:0] element__to_mem_wdata__en [0:5];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__to_mem_wdata__msg [0:5];
   logic [0:0] element__to_mem_wdata__rdy [0:5];
 
-  FlexibleFuRTL__91aabf4745f968b9 element
-  (
+  FlexibleFuRTL__91aabf4745f968b9 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+) element (
     .clk( element__clk ),
     .recv_in_count( element__recv_in_count ),
     .reset( element__reset ),
@@ -4158,8 +4175,9 @@ endmodule
 // Full name: TileRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__ctrl_mem_size_4__data_mem_size_100__num_ctrl_4__total_steps_140__num_fu_inports_4__num_fu_outports_2__num_connect_inports_4__num_connect_outports_4__Fu_FlexibleFuRTL__FuList_[<class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>]__const_list_[CGRAData_16_1_1(Bits16(0x000a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/tile/TileRTL.py
 
-module TileRTL__3eb488da24ed7118
-(
+module TileRTL__3eb488da24ed7118#(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [0:0] reset ,
   input logic [0:0] from_mem_rdata__en  ,
@@ -4178,10 +4196,10 @@ module TileRTL__3eb488da24ed7118
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_data__msg [0:3] ,
   input logic [0:0] send_data__rdy [0:3] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -4434,10 +4452,10 @@ module TileRTL__3eb488da24ed7118
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__send_out__msg [0:1];
   logic [0:0] element__send_out__rdy [0:1];
   logic [0:0] element__to_mem_raddr__en [0:5];
-  logic [6:0] element__to_mem_raddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_raddr__msg [0:5];
   logic [0:0] element__to_mem_raddr__rdy [0:5];
   logic [0:0] element__to_mem_waddr__en [0:5];
-  logic [6:0] element__to_mem_waddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_waddr__msg [0:5];
   logic [0:0] element__to_mem_waddr__rdy [0:5];
   logic [0:0] element__to_mem_wdata__en [0:5];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__to_mem_wdata__msg [0:5];
@@ -4746,8 +4764,9 @@ endmodule
 // Full name: TileRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__ctrl_mem_size_4__data_mem_size_100__num_ctrl_4__total_steps_140__num_fu_inports_4__num_fu_outports_2__num_connect_inports_4__num_connect_outports_4__Fu_FlexibleFuRTL__FuList_[<class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>]__const_list_[CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0013),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/tile/TileRTL.py
 
-module TileRTL__d56273f01cfaa191
-(
+module TileRTL__d56273f01cfaa191 #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [0:0] reset ,
   input logic [0:0] from_mem_rdata__en  ,
@@ -4766,10 +4785,10 @@ module TileRTL__d56273f01cfaa191
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_data__msg [0:3] ,
   input logic [0:0] send_data__rdy [0:3] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -5022,10 +5041,10 @@ module TileRTL__d56273f01cfaa191
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__send_out__msg [0:1];
   logic [0:0] element__send_out__rdy [0:1];
   logic [0:0] element__to_mem_raddr__en [0:5];
-  logic [6:0] element__to_mem_raddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_raddr__msg [0:5];
   logic [0:0] element__to_mem_raddr__rdy [0:5];
   logic [0:0] element__to_mem_waddr__en [0:5];
-  logic [6:0] element__to_mem_waddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_waddr__msg [0:5];
   logic [0:0] element__to_mem_waddr__rdy [0:5];
   logic [0:0] element__to_mem_wdata__en [0:5];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__to_mem_wdata__msg [0:5];
@@ -5334,8 +5353,9 @@ endmodule
 // Full name: TileRTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__ctrl_mem_size_4__data_mem_size_100__num_ctrl_4__total_steps_140__num_fu_inports_4__num_fu_outports_2__num_connect_inports_4__num_connect_outports_4__Fu_FlexibleFuRTL__FuList_[<class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>]__const_list_[CGRAData_16_1_1(Bits16(0x0001),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/tile/TileRTL.py
 
-module TileRTL__f2822cdaf2b80d8f
-(
+module TileRTL__f2822cdaf2b80d8f#(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input  logic [0:0] clk ,
   input  logic [0:0] reset ,
   input logic [0:0] from_mem_rdata__en  ,
@@ -5354,10 +5374,10 @@ module TileRTL__f2822cdaf2b80d8f
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 send_data__msg [0:3] ,
   input logic [0:0] send_data__rdy [0:3] ,
   output logic [0:0] to_mem_raddr__en  ,
-  output logic [6:0] to_mem_raddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_raddr__msg  ,
   input logic [0:0] to_mem_raddr__rdy  ,
   output logic [0:0] to_mem_waddr__en  ,
-  output logic [6:0] to_mem_waddr__msg  ,
+  output logic [TCDMAddrWidth-1:0] to_mem_waddr__msg  ,
   input logic [0:0] to_mem_waddr__rdy  ,
   output logic [0:0] to_mem_wdata__en  ,
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 to_mem_wdata__msg  ,
@@ -5610,10 +5630,10 @@ module TileRTL__f2822cdaf2b80d8f
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__send_out__msg [0:1];
   logic [0:0] element__send_out__rdy [0:1];
   logic [0:0] element__to_mem_raddr__en [0:5];
-  logic [6:0] element__to_mem_raddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_raddr__msg [0:5];
   logic [0:0] element__to_mem_raddr__rdy [0:5];
   logic [0:0] element__to_mem_waddr__en [0:5];
-  logic [6:0] element__to_mem_waddr__msg [0:5];
+  logic [TCDMAddrWidth-1:0] element__to_mem_waddr__msg [0:5];
   logic [0:0] element__to_mem_waddr__rdy [0:5];
   logic [0:0] element__to_mem_wdata__en [0:5];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 element__to_mem_wdata__msg [0:5];
@@ -5860,8 +5880,9 @@ endmodule
 // Full name: CGRARTL__DataType_CGRAData_16_1_1__payload_16__predicate_1__bypass_1__PredicateType_CGRAData_1_1__payload_1__predicate_1__CtrlType_CGRAConfig_6_4_6_8__764c37c5066f1efc__width_4__height_4__ctrl_mem_size_4__data_mem_size_100__num_ctrl_4__total_steps_140__FunctionUnit_FlexibleFuRTL__FuList_[<class 'VectorCGRA.fu.single.AdderRTL.AdderRTL'>, <class 'VectorCGRA.fu.single.PhiRTL.PhiRTL'>, <class 'VectorCGRA.fu.single.MemUnitRTL.MemUnitRTL'>, <class 'VectorCGRA.fu.single.CompRTL.CompRTL'>, <class 'VectorCGRA.fu.single.MulRTL.MulRTL'>, <class 'VectorCGRA.fu.single.BranchRTL.BranchRTL'>]__preload_data_[CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0001),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0002),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0003),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0004),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0005),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0006),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0007),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0008),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0009),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x000f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0010),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0011),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0012),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0013),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0014),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0015),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0016),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0017),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0018),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0019),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x001f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0020),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0021),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0022),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0023),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0024),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0025),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0026),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0027),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0028),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0029),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x002f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0030),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0031),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0032),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0033),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0034),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0035),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0036),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0037),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0038),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0039),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x003f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0040),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0041),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0042),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0043),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0044),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0045),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0046),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0047),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0048),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0049),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x004f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0050),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0051),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0052),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0053),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0054),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0055),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0056),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0057),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0058),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0059),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005b),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005c),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005d),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005e),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x005f),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0060),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0061),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0062),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0063),Bits1(0x1),Bits1(0x0))]__preload_const_[[CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0013),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0001),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x000a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x000a),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))], [CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0)), CGRAData_16_1_1(Bits16(0x0000),Bits1(0x1),Bits1(0x0))]]
 // At /home/lab-cgra/OpenCGRA/VectorCGRA/cgra/CGRARTL.py
 
-module CGRARTL__e95cacd33b23104e
-(
+module CGRARTL__e95cacd33b23104e #(
+parameter int unsigned TCDMAddrWidth = 6
+)(
   input logic [0:0] clk ,
   input logic [0:0] reset ,
   input logic [0:0] recv_waddr__en [0:15] ,
@@ -5878,7 +5899,7 @@ module CGRARTL__e95cacd33b23104e
   	//-------------------------------------------------------------
   output logic [0:0] data_mem__recv_waddr__en1 [0:3],
   // size of waddr = clog2(Population Data Size)
-  output logic [6:0] data_mem__recv_waddr__msg1 [0:3],
+  output logic [TCDMAddrWidth-1:0] data_mem__recv_waddr__msg1 [0:3],
   input logic [0:0] data_mem__recv_waddr__rdy1 [0:3],
   output logic [0:0] data_mem__recv_wdata__en1 [0:3],
   output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__recv_wdata__msg1 [0:3],
@@ -5889,7 +5910,7 @@ module CGRARTL__e95cacd33b23104e
   	//-------------------------------------------------------------
   output logic data_mem__recv_raddr__en1 [0:3],
   // size of raddr = clog2(Population Data Size)
-  output logic [6:0] data_mem__recv_raddr__msg1 [0:3],
+  output logic [TCDMAddrWidth-1:0] data_mem__recv_raddr__msg1 [0:3],
   input logic data_mem__recv_raddr__rdy1 [0:3],
   input logic data_mem__send_rdata__en1 [0:3],
   input CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__send_rdata__msg1 [0:3],
@@ -5906,10 +5927,10 @@ module CGRARTL__e95cacd33b23104e
   logic [0:0] data_mem__clk;
   logic [0:0] data_mem__reset;
   logic [0:0] data_mem__recv_raddr__en [0:3];
-  logic [6:0] data_mem__recv_raddr__msg [0:3];
+  logic [TCDMAddrWidth-1:0] data_mem__recv_raddr__msg [0:3];
   logic [0:0] data_mem__recv_raddr__rdy [0:3];
   logic [0:0] data_mem__recv_waddr__en [0:3];
-  logic [6:0] data_mem__recv_waddr__msg [0:3];
+  logic [TCDMAddrWidth-1:0] data_mem__recv_waddr__msg [0:3];
   logic [0:0] data_mem__recv_waddr__rdy [0:3];
   logic [0:0] data_mem__recv_wdata__en [0:3];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__recv_wdata__msg [0:3];
@@ -5962,17 +5983,18 @@ module CGRARTL__e95cacd33b23104e
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 tile__send_data__msg [0:15][0:3];
   logic [0:0] tile__send_data__rdy [0:15][0:3];
   logic [0:0] tile__to_mem_raddr__en [0:15];
-  logic [6:0] tile__to_mem_raddr__msg [0:15];
+  logic [TCDMAddrWidth-1:0] tile__to_mem_raddr__msg [0:15];
   logic [0:0] tile__to_mem_raddr__rdy [0:15];
   logic [0:0] tile__to_mem_waddr__en [0:15];
-  logic [6:0] tile__to_mem_waddr__msg [0:15];
+  logic [TCDMAddrWidth-1:0] tile__to_mem_waddr__msg [0:15];
   logic [0:0] tile__to_mem_waddr__rdy [0:15];
   logic [0:0] tile__to_mem_wdata__en [0:15];
   CGRAData_16_1_1__payload_16__predicate_1__bypass_1 tile__to_mem_wdata__msg [0:15];
   logic [0:0] tile__to_mem_wdata__rdy [0:15];
 
-  TileRTL__c49ddb6cf72af7d2 tile__0
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__0 (
     .clk( tile__clk[0] ),
     .reset( tile__reset[0] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[0] ),
@@ -6001,8 +6023,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[0] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__1
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__1 (
     .clk( tile__clk[1] ),
     .reset( tile__reset[1] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[1] ),
@@ -6031,8 +6054,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[1] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__2
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__2 (
     .clk( tile__clk[2] ),
     .reset( tile__reset[2] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[2] ),
@@ -6061,8 +6085,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[2] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__3
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__3 (
     .clk( tile__clk[3] ),
     .reset( tile__reset[3] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[3] ),
@@ -6091,8 +6116,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[3] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__4
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__4 (
     .clk( tile__clk[4] ),
     .reset( tile__reset[4] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[4] ),
@@ -6121,8 +6147,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[4] )
   );
 
-  TileRTL__d56273f01cfaa191 tile__5
-  (
+  TileRTL__d56273f01cfaa191 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__5 (
     .clk( tile__clk[5] ),
     .reset( tile__reset[5] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[5] ),
@@ -6151,8 +6178,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[5] )
   );
 
-  TileRTL__f2822cdaf2b80d8f tile__6
-  (
+  TileRTL__f2822cdaf2b80d8f #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__6 (
     .clk( tile__clk[6] ),
     .reset( tile__reset[6] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[6] ),
@@ -6181,8 +6209,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[6] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__7
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__7 (
     .clk( tile__clk[7] ),
     .reset( tile__reset[7] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[7] ),
@@ -6211,8 +6240,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[7] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__8
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__8 (
     .clk( tile__clk[8] ),
     .reset( tile__reset[8] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[8] ),
@@ -6241,8 +6271,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[8] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__9
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__9 (
     .clk( tile__clk[9] ),
     .reset( tile__reset[9] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[9] ),
@@ -6271,8 +6302,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[9] )
   );
 
-  TileRTL__3eb488da24ed7118 tile__10
-  (
+  TileRTL__3eb488da24ed7118 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__10 (
     .clk( tile__clk[10] ),
     .reset( tile__reset[10] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[10] ),
@@ -6301,8 +6333,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[10] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__11
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__11 (
     .clk( tile__clk[11] ),
     .reset( tile__reset[11] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[11] ),
@@ -6331,8 +6364,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[11] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__12
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__12 (
     .clk( tile__clk[12] ),
     .reset( tile__reset[12] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[12] ),
@@ -6361,8 +6395,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[12] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__13
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__13 (
     .clk( tile__clk[13] ),
     .reset( tile__reset[13] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[13] ),
@@ -6391,8 +6426,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[13] )
   );
 
-  TileRTL__3eb488da24ed7118 tile__14
-  (
+  TileRTL__3eb488da24ed7118 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__14  (
     .clk( tile__clk[14] ),
     .reset( tile__reset[14] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[14] ),
@@ -6421,8 +6457,9 @@ module CGRARTL__e95cacd33b23104e
     .to_mem_wdata__rdy( tile__to_mem_wdata__rdy[14] )
   );
 
-  TileRTL__c49ddb6cf72af7d2 tile__15
-  (
+  TileRTL__c49ddb6cf72af7d2 #(
+.TCDMAddrWidth(TCDMAddrWidth)
+)tile__15  (
     .clk( tile__clk[15] ),
     .reset( tile__reset[15] ),
     .from_mem_rdata__en( tile__from_mem_rdata__en[15] ),
