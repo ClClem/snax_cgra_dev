@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: SHL-0.51
 
 package:
-  name: snax-cgra-dev
+  name: snax_cgra_dev
   authors:
     - Claudio Clemente <s314857@studenti.polito.it>
 
