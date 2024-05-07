@@ -42,9 +42,9 @@ module CGRA_csrs#(
 
   logic [RegCount-1:0][$clog2(KernelSize)-1:0] csr_addr_j;
   logic reg_start;
+
   //-------------------------------
   // Updating CSR registers
-  //
   //-------------------------------
   always_ff @ (posedge clk_i or negedge rst_ni) begin
     if(!rst_ni) begin

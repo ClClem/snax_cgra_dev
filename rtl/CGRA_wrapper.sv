@@ -27,88 +27,140 @@ typedef struct packed {
 } CGRAData_1_1__payload_1__predicate_1;
 
 module CGRA_wrapper#(
-	parameter int unsigned NarrowDataWidth = 64,
-	parameter int unsigned WideDataWidth     = 512,
-  	parameter int unsigned TCDMDepth = 64,
-  	parameter int unsigned TCDMReqPorts = 4,    //equal #tiles that can access memory
-  	parameter int unsigned NrBanks = 32,
-  	parameter int unsigned TCDMSize = NrBanks * TCDMDepth * (NarrowDataWidth/8),
-  	parameter int unsigned TCDMAddrWidth = $clog2(TCDMSize),
+	parameter int unsigned DataWidth = 64,
+  	parameter int unsigned SnaxTcdmPorts = 4,    //equal #tiles that can access memory
+  	parameter int unsigned TCDMAddrWidth = 48,
+    parameter int unsigned AddrWidth = 6;
 
 	parameter int unsigned CGRADim      = 16,
 	parameter int unsigned KernelSize   = 4,
 	parameter int unsigned RegCount     = CGRADim,
 	parameter int unsigned RegDataWidth = 64,
 	parameter int unsigned RegAddrWidth = $clog2(RegCount) + 1
+
+    parameter type         acc_req_t     = logic,
+    parameter type         acc_rsp_t     = logic,
+    parameter type         tcdm_req_t    = logic,
+    parameter type         tcdm_rsp_t    = logic
 )(
-
-
-
-	//--------------------------------------------------------------------
 	
 	input  logic                    clk_i,
 	input  logic                    rst_ni,
-    input  logic [RegAddrWidth-1:0] csr_addr_i,
-    input  logic [RegDataWidth-1:0] csr_wr_data_i,
-    input  logic                    csr_wr_en_i,
-    input  logic                    csr_req_valid_i,
-    output logic                    csr_req_ready_o,
-    output logic [RegDataWidth-1:0] csr_rd_data_o,
-    output logic                    csr_rsp_valid_o,
-    input  logic                    csr_rsp_ready_i,
 
-	//Data transfer
-	//Assuming that the CGRA can output just 1 data at a time
-	//It can be changed by connecting each tile to the output
-    
-    //-----------------------------
-  	// Narrow TCDM ports
-	//-----------------------------
+	input  logic     snax_qvalid_i,
+    output logic     snax_qready_o,
+    input  acc_req_t snax_req_i,
 
-	output  logic [TCDMReqPorts-1:0]                      tcdm_req_write,
-	output  logic [TCDMReqPorts-1:0][TCDMAddrWidth-1:0]   tcdm_req_addr,
-	output  logic [TCDMReqPorts-1:0][WideDataWidth-1:0]   tcdm_req_data,
-    output  logic [TCDMReqPorts-1:0]                      tcdm_req_amo,
-	output  logic [TCDMReqPorts-1:0][WideDataWidth/8-1:0] tcdm_req_strb,
-	output  logic [TCDMReqPorts-1:0]                      tcdm_req_user_core_id_i,
-	output  logic [TCDMReqPorts-1:0]                      tcdm_req_user_is_core_i,
-	output  logic [TCDMReqPorts-1:0]                      tcdm_req_q_valid,
-	
-	input logic [TCDMReqPorts-1:0]                      tcdm_rsp_q_ready,
-    input logic [TCDMReqPorts-1:0]                      tcdm_rsp_p_valid,
-	input logic [TCDMReqPorts-1:0][  WideDataWidth-1:0] tcdm_rsp_data
+    output acc_rsp_t snax_resp_o,
+    output logic     snax_pvalid_o,
+    input  logic     snax_pready_i,
+
+    output tcdm_req_t [SnaxTcdmPorts-1:0] snax_tcdm_req_o,
+    input  tcdm_rsp_t [SnaxTcdmPorts-1:0] snax_tcdm_rsp_i,
+    output logic                          snax_barrier_o,
+
 );
 
-CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem_recv_wdata_msg_internal [0:3];
-CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem_send_rdata_msg_internal [0:3];
+    CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem_recv_wdata_msg_internal [0:3];
+    CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem_send_rdata_msg_internal [0:3];
 
- //write to memory
+
+    logic [RegAddrWidth-1:0] csr_addr_i,
+    logic [RegDataWidth-1:0] csr_wr_data_i,
+    logic                    csr_wr_en_i,
+    logic                    csr_req_valid_i,
+    logic                    csr_req_ready_o,
+    logic [RegDataWidth-1:0] csr_rsp_data_o,
+    logic                    csr_rsp_valid_o,
+    logic                    csr_rsp_ready_i,
+	
+    //-----------------------------
+    // Seperated TCDM ports signals
+    //-----------------------------
+    logic  [SnaxTcdmPorts-1:0]                        tcdm_req_write;
+    logic  [SnaxTcdmPorts-1:0][TCDMAddrWidth-1:0]     tcdm_req_addr;
+    //Note that tcdm_req_amo_i is 4 bits based on reqrsp definition
+    logic  [SnaxTcdmPorts-1:0][3:0]                   tcdm_req_amo;
+    logic  [SnaxTcdmPorts-1:0][DataWidth-1:0]   tcdm_req_data;
+    //Note that tcdm_req_user_core_id_i is 5 bits based on Snitch definition
+    logic  [SnaxTcdmPorts-1:0][4:0]                   tcdm_req_user_core_id;
+    bit    [SnaxTcdmPorts-1:0]                        tcdm_req_user_is_core;
+    logic  [SnaxTcdmPorts-1:0][DataWidth/8-1:0] tcdm_req_strb;
+    logic  [SnaxTcdmPorts-1:0]                        tcdm_req_q_valid;
+    logic  [SnaxTcdmPorts-1:0]                        tcdm_rsp_q_ready;
+    logic  [SnaxTcdmPorts-1:0]                        tcdm_rsp_p_valid;
+    logic  [SnaxTcdmPorts-1:0][DataWidth-1:0]   tcdm_rsp_data;
+
+
+
+    //-------------------------------------------------------------
+    //write to memory
   	//-------------------------------------------------------------
 	 logic data_mem_recv_waddr_en [0:3];
 	// size of waddr = clog2(Population Data Size) In this case I had mem size = 100, 7 bits.
-	 logic [TCDMAddrWidth-1:0] data_mem_recv_waddr_msg [0:3];
+	 logic [AddrWidth-1:0] data_mem_recv_waddr_msg [0:3];
 	 logic data_mem_recv_waddr_rdy [0:3];
 	 logic data_mem_recv_wdata_en [0:3];
 	 logic data_mem_recv_wdata_rdy [0:3];
-	//-------------------------------------------------------------
+
 	
+  	//------------------------------------------
 	//Reading from memory
   	//------------------------------------------
   	 logic data_mem_recv_raddr_en [0:3];
-  	 logic [TCDMAddrWidth-1:0] data_mem_recv_raddr_msg [0:3];
+  	 logic [AddrWidth-1:0] data_mem_recv_raddr_msg [0:3];
   	 logic data_mem_recv_raddr_rdy [0:3];
   	 logic data_mem_send_rdata_en [0:3];
   	 logic data_mem_send_rdata_rdy [0:3];
-  	//------------------------------------------
- 
-logic [1:0] csr_tile_addr [0:15];
-CGRAConfig_6_4_6_8__764c37c5066f1efc csr_tile_data [0:15];
-logic  csr_tile_wr_en [0:15];
-logic  csr_tile_wr_valid [0:15];
-logic recv_tile_rdy [0:15];
 
-logic recv_wadr_rdy_o [0:15];
-logic recv_wopt_rdy_o [0:15];
+ 
+    logic [1:0] csr_tile_addr [0:15];
+    CGRAConfig_6_4_6_8__764c37c5066f1efc csr_tile_data [0:15];
+    logic  csr_tile_wr_en [0:15];
+    logic  csr_tile_wr_valid [0:15];
+    logic recv_tile_rdy [0:15];
+
+    logic recv_wadr_rdy_o [0:15];
+    logic recv_wopt_rdy_o [0:15];
+
+
+snax-cgra_interface #(
+        .acc_req_t ( acc_req_t ),
+        .acc_rsp_t ( acc_rsp_t )
+    ) i_snax_interface_translator(
+        //-----------------------------
+        // Clocks and reset
+        //-----------------------------
+        .clk_i(clk_i),
+        .rst_ni(rst_ni),
+
+        .snax_qvalid_i(snax_qvalid_i),
+        .snax_qready_o(snax_qready_o),
+        .snax_req_i(snax_req_i),
+
+        .snax_resp_o(snax_resp_o),
+        .snax_pvalid_o(snax_pvalid_o),
+        .snax_pready_i(snax_pready_i),
+
+        //-----------------------------
+        // Simplified CSR control ports
+        //-----------------------------
+        // Request
+        .io_csr_req_bits_data_i(csr_wr_data_i),
+        .io_csr_req_bits_addr_i(csr_addr_i),
+        .io_csr_req_bits_write_i(csr_wr_en_i),
+        .io_csr_req_valid_i(csr_req_valid_i),
+        .io_csr_req_ready_o(csr_req_ready_o),
+
+        // Response
+        .io_csr_rsp_ready_i(csr_rsp_ready_i),
+        .io_csr_rsp_valid_o(csr_rsp_valid_o),
+        .io_csr_rsp_bits_data_o(csr_rsp_data_o)
+
+    );
+
+
+
 
 CGRA_csrs#(
   .CGRADim      (16),
@@ -122,11 +174,10 @@ CGRA_csrs#(
   .csr_wr_en_i       (csr_wr_en_i),
   .csr_req_valid_i   (csr_req_valid_i),
   .csr_req_ready_o   (csr_req_ready_o),
-  .csr_rd_data_o     (csr_rd_data_o),
+  .csr_rd_data_o     (csr_rsp_data_o),
   .csr_rsp_valid_o   (csr_rsp_valid_o),
   .csr_rsp_ready_i   (csr_rsp_ready_i),
-  // Fix this to 2 bits only
-  // Let's do 4 ALU operations for simplicity
+
   .csr_tile_addr     (csr_tile_addr),
   .csr_tile_data     (csr_tile_data),
   .csr_tile_wr_en    (csr_tile_wr_en),
@@ -137,12 +188,12 @@ CGRA_csrs#(
 
 //chaning mem address to TCDMaddressWidth
 CGRARTL__e95cacd33b23104e#(
-.TCDMAddrWidth(TCDMAddrWidth)
+.TCDMAddrWidth(AddrWidth)
 ) CGRARtl (
     .clk(clk_i),
     .reset(rst_ni),
 
-    // CSR operations
+    // CSR 
     //-------------------------------------------------------------
     .recv_waddr__en	    (csr_tile_wr_en),
     .recv_waddr__msg	(csr_tile_addr),
@@ -196,27 +247,27 @@ always_comb begin
 	
 		//avoiding inferred latches
 
-		data_mem_recv_waddr_rdy[i] = tcdm_rsp_q_ready[i];
-		data_mem_recv_wdata_rdy[i] = tcdm_rsp_q_ready[i];
-		tcdm_req_amo[i] = 0;
+        data_mem_recv_waddr_rdy[i] = tcdm_rsp_q_ready[i];
+        data_mem_recv_wdata_rdy[i] = tcdm_rsp_q_ready[i];
+        tcdm_req_amo[i] = 0;
 
 		
-		data_mem_send_rdata_msg_internal[i].bypass = 0;
-		data_mem_send_rdata_msg_internal[i].predicate = 0;
-		data_mem_send_rdata_msg_internal[i].payload = 0;
-		data_mem_recv_raddr_rdy[i] = tcdm_rsp_q_ready[i];
-		data_mem_send_rdata_en[i] = 0;
+        data_mem_send_rdata_msg_internal[i].bypass = 0;
+        data_mem_send_rdata_msg_internal[i].predicate = 0;
+        data_mem_send_rdata_msg_internal[i].payload = 0;
+        data_mem_recv_raddr_rdy[i] = tcdm_rsp_q_ready[i];
+        data_mem_send_rdata_en[i] = 0;
 		
 		//----------------------------------------------------------------------------
 		//Write portion
 		//----------------------------------------------------------------------------
 		if ( data_mem_recv_waddr_en[i] == 1'd1 ) begin			
             
-		        tcdm_req_addr[i] = data_mem_recv_waddr_msg[i];
-			    tcdm_req_write[i] = data_mem_recv_waddr_en[i] & data_mem_recv_wdata_en[i];
-			    tcdm_req_data[i] = data_mem_recv_wdata_msg_internal[i].payload;
-			    tcdm_req_strb[i] = 8'hFF;	
-			    tcdm_req_q_valid[i] = tcdm_rsp_q_ready[i] & data_mem_recv_wdata_msg_internal[i].predicate;	
+            tcdm_req_addr[i][5:0] = data_mem_recv_waddr_msg[i];
+			tcdm_req_write[i] = data_mem_recv_waddr_en[i] & data_mem_recv_wdata_en[i];
+			tcdm_req_data[i] = data_mem_recv_wdata_msg_internal[i].payload;
+		    tcdm_req_strb[i] = 8'hFF;	
+			tcdm_req_q_valid[i] = tcdm_rsp_q_ready[i] & data_mem_recv_wdata_msg_internal[i].predicate;	
 
         //----------------------------------------------------------------------------
 		//Read portion
@@ -224,14 +275,35 @@ always_comb begin
 		
 		end else if(data_mem_recv_raddr_en[i] == 1'd1) begin
 
-				tcdm_req_addr[i] = data_mem_recv_raddr_msg[i];
-				data_mem_send_rdata_en[i] = tcdm_rsp_p_valid[i];
-				data_mem_send_rdata_msg_internal[i].predicate = 1'd1;
-				data_mem_send_rdata_msg_internal[i].payload = tcdm_rsp_data[i];
-				tcdm_req_q_valid[i] = data_mem_send_rdata_rdy[i] & data_mem_recv_raddr_en[i];
+            tcdm_req_addr[i][5:0] = data_mem_recv_raddr_msg[i];
+			data_mem_send_rdata_en[i] = tcdm_rsp_p_valid[i];
+			data_mem_send_rdata_msg_internal[i].predicate = 1'd1;
+			data_mem_send_rdata_msg_internal[i].payload = tcdm_rsp_data[i];
+		    tcdm_req_q_valid[i] = data_mem_send_rdata_rdy[i] & data_mem_recv_raddr_en[i];
 			end
 		end
-
 	end
-	
+
+	always_comb begin: gen_hard_bundle
+        for(int i=0; i < SnaxTcdmPorts; i++) begin
+
+            snax_tcdm_req_o[i].q.write           = tcdm_req_write[i];
+            snax_tcdm_req_o[i].q.addr            = tcdm_req_addr[i];
+            // snax_tcdm_req_o[i].q.amo             = tcdm_req_amo_i[i];
+            snax_tcdm_req_o[i].q.amo             = AMONone;
+            snax_tcdm_req_o[i].q.data            = tcdm_req_data[i];
+            snax_tcdm_req_o[i].q.user.core_id    = tcdm_req_user_core_id[i];
+            snax_tcdm_req_o[i].q.user.is_core    = tcdm_req_user_is_core[i];
+            snax_tcdm_req_o[i].q.strb            = tcdm_req_strb[i];
+            snax_tcdm_req_o[i].q_valid           = tcdm_req_q_valid[i];
+
+            tcdm_rsp_q_ready[i]                = snax_tcdm_rsp_i[i].q_ready;
+            tcdm_rsp_p_valid[i]                = snax_tcdm_rsp_i[i].p_valid;
+            tcdm_rsp_data[i]                   = snax_tcdm_rsp_i[i].p.data;
+
+        end
+    end
+
+    assign snax_barrier_o = csr_req_ready_o;
+
 endmodule
