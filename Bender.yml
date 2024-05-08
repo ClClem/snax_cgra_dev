@@ -1,0 +1,22 @@
+# Copyright 2023 KU Leuven
+# Solderpad Hardware License, Version 0.51, see LICENSE for details.
+# SPDX-License-Identifier: SHL-0.51
+
+package:
+  name: snax_cgra_dev
+  authors:
+    - Claudio Clemente <s314857@studenti.polito.it>
+
+dependencies:
+  # No existing tags for snitch_cluster, so this rev hash is the latest update as of Aug 20, 2023
+
+
+sources:
+  - include_dirs:
+    - rtl
+    target: snax_cgra_dev
+    files:
+      - rtl/CGRA_wrapper.sv
+      - rtl/CGRA_csrs.sv
+      - rtl/CGRARTL__e95cacd33b23104e.sv
+      - rtl/snax_cgra_interface.sv
