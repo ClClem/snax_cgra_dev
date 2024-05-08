@@ -1,4 +1,4 @@
-module snax-cgra_interface #(
+module snax_cgra_interface #(
     parameter type         acc_req_t     = logic,
     parameter type         acc_rsp_t     = logic
 ) (
@@ -17,7 +17,7 @@ module snax-cgra_interface #(
     // Simplified CSR control ports
     //-----------------------------
     // Request
-    output  logic [31:0] io_csr_req_bits_data_i,
+    output  logic [63:0] io_csr_req_bits_data_i,
     output  logic [31:0] io_csr_req_bits_addr_i,
     output  logic        io_csr_req_bits_write_i,
     output  logic        io_csr_req_valid_i,
@@ -26,11 +26,15 @@ module snax-cgra_interface #(
     // Response
     output  logic        io_csr_rsp_ready_i,
     input logic        io_csr_rsp_valid_o,
-    input logic [31:0] io_csr_rsp_bits_data_o
+    input logic [63:0] io_csr_rsp_bits_data_o
 
 );
 
     localparam int unsigned CsrAddrOFfset = 32'h3c0;
+    localparam int unsigned CSRRS = 0;
+    localparam int unsigned CSRRSI = 0;
+    localparam int unsigned CSRRC = 0;
+    localparam int unsigned CSRRCI = 0;
 
     // req
     logic                                  write_csr;

@@ -30,13 +30,12 @@ module CGRA_wrapper#(
 	parameter int unsigned DataWidth = 64,
   	parameter int unsigned SnaxTcdmPorts = 4,    //equal #tiles that can access memory
   	parameter int unsigned TCDMAddrWidth = 48,
-    parameter int unsigned AddrWidth = 6;
+   	parameter int unsigned AddrWidth = 6,
 
 	parameter int unsigned CGRADim      = 16,
 	parameter int unsigned KernelSize   = 4,
-	parameter int unsigned RegCount     = CGRADim,
-	parameter int unsigned RegDataWidth = 64,
-	parameter int unsigned RegAddrWidth = $clog2(RegCount) + 1
+	parameter int unsigned RegDataWidth = DataWidth,
+	parameter int unsigned RegAddrWidth = 32,
 
     parameter type         acc_req_t     = logic,
     parameter type         acc_rsp_t     = logic,
@@ -56,8 +55,8 @@ module CGRA_wrapper#(
     input  logic     snax_pready_i,
 
     output tcdm_req_t [SnaxTcdmPorts-1:0] snax_tcdm_req_o,
-    input  tcdm_rsp_t [SnaxTcdmPorts-1:0] snax_tcdm_rsp_i,
-    output logic                          snax_barrier_o,
+    input  tcdm_rsp_t [SnaxTcdmPorts-1:0] snax_tcdm_rsp_i, // need to change to tcdm_req_t/rsp
+    output logic                          snax_barrier_o
 
 );
 
@@ -65,14 +64,14 @@ module CGRA_wrapper#(
     CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem_send_rdata_msg_internal [0:3];
 
 
-    logic [RegAddrWidth-1:0] csr_addr_i,
-    logic [RegDataWidth-1:0] csr_wr_data_i,
-    logic                    csr_wr_en_i,
-    logic                    csr_req_valid_i,
-    logic                    csr_req_ready_o,
-    logic [RegDataWidth-1:0] csr_rsp_data_o,
-    logic                    csr_rsp_valid_o,
-    logic                    csr_rsp_ready_i,
+	logic [RegAddrWidth-1:0] csr_addr_i;
+	logic [RegDataWidth-1:0] csr_wr_data_i;
+    logic                    csr_wr_en_i;
+    logic                    csr_req_valid_i;
+    logic                    csr_req_ready_o;
+	logic [RegDataWidth-1:0] csr_rsp_data_o;
+    logic                    csr_rsp_valid_o;
+    logic                    csr_rsp_ready_i;
 	
     //-----------------------------
     // Seperated TCDM ports signals
@@ -124,7 +123,7 @@ module CGRA_wrapper#(
     logic recv_wopt_rdy_o [0:15];
 
 
-snax-cgra_interface #(
+snax_cgra_interface #(
         .acc_req_t ( acc_req_t ),
         .acc_rsp_t ( acc_rsp_t )
     ) i_snax_interface_translator(
@@ -284,13 +283,13 @@ always_comb begin
 		end
 	end
 
-	always_comb begin: gen_hard_bundle
+	/*always_comb begin: gen_hard_bundle
         for(int i=0; i < SnaxTcdmPorts; i++) begin
 
             snax_tcdm_req_o[i].q.write           = tcdm_req_write[i];
             snax_tcdm_req_o[i].q.addr            = tcdm_req_addr[i];
             // snax_tcdm_req_o[i].q.amo             = tcdm_req_amo_i[i];
-            snax_tcdm_req_o[i].q.amo             = AMONone;
+            snax_tcdm_req_o[i].q.amo             = 0;
             snax_tcdm_req_o[i].q.data            = tcdm_req_data[i];
             snax_tcdm_req_o[i].q.user.core_id    = tcdm_req_user_core_id[i];
             snax_tcdm_req_o[i].q.user.is_core    = tcdm_req_user_is_core[i];
@@ -302,7 +301,7 @@ always_comb begin
             tcdm_rsp_data[i]                   = snax_tcdm_rsp_i[i].p.data;
 
         end
-    end
+    end*/
 
     assign snax_barrier_o = csr_req_ready_o;
 

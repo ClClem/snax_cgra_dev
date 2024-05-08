@@ -9,7 +9,7 @@ module CGRA_csrs#(
   parameter int unsigned KernelSize   = 4,
   parameter int unsigned RegCount     = CGRADim,
   parameter int unsigned RegDataWidth = 64,
-  parameter int unsigned RegAddrWidth = $clog2(RegCount) + 1 //Needed for the Start command
+  parameter int unsigned RegAddrWidth = 32
 )(
   input  logic                     clk_i,
   input  logic                     rst_ni,
