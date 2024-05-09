@@ -59,7 +59,7 @@ module CGRA_csrs#(
 	        end
       end
     end else begin
-	if(csr_addr_i == CGRADim + 1) begin
+	    if(req_success && csr_wr_en_i && csr_addr_i == CGRADim + 1) begin
 		reg_start <= csr_wr_data_i[0];
 	end else begin
         if(req_success && csr_wr_en_i) begin
@@ -125,7 +125,7 @@ module CGRA_csrs#(
                         csr_tile_wr_valid[tile_num] <= 1;
                         csr_tile_data[tile_num] <= csr_reg_set[tile_num][cycle_i];
                 end
-        cycle_i++;
+
         if(cycle_i == 3) begin
             cgra_loaded <= 1;
             reg_start <= 0;
@@ -133,6 +133,8 @@ module CGRA_csrs#(
             reg_start <= 1;
             cgra_loaded <= 0;
         end
+        cycle_i++;
+	      
       end else begin
         for( tile_num = 0; tile_num < CGRADim; tile_num++) begin
             csr_tile_addr[tile_num] <= 0;
