@@ -31,7 +31,7 @@ module CGRA_csrs#(
  
 );
 
-  CGRAConfig_6_4_6_8__764c37c5066f1efc csr_reg_set [RegCount][KernelSize];
+  CGRAConfig_6_4_6_8__764c37c5066f1efc csr_reg_set [0:RegCount-1][0:KernelSize-1];
   CGRAConfig_6_4_6_8__764c37c5066f1efc zero_const = 0;
   logic [RegDataWidth-1:0] input_buffer;
   logic req_success;
