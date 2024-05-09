@@ -16,7 +16,7 @@ sources:
     - rtl
     target: snax_cgra_dev
     files:
-      - rtl/CGRA_wrapper.sv
+      - rtl/snax_cgra_wrapper.sv
       - rtl/CGRA_csrs.sv
       - rtl/CGRARTL__e95cacd33b23104e.sv
       - rtl/snax_cgra_interface.sv
