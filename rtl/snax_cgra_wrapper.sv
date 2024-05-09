@@ -26,7 +26,7 @@ typedef struct packed {
   logic [0:0] predicate;
 } CGRAData_1_1__payload_1__predicate_1;
 
-module CGRA_wrapper#(
+module snax_cgra_wrapper#(
 	parameter int unsigned DataWidth = 64,
   	parameter int unsigned SnaxTcdmPorts = 4,    //equal #tiles that can access memory
   	parameter int unsigned TCDMAddrWidth = 48,
