@@ -206,22 +206,22 @@ CGRARTL__e95cacd33b23104e#(
     //memory data transfer
     //write to memory
     //-------------------------------------------------------------
-    .data_mem__recv_waddr__en1	(data_mem_recv_waddr_en),
-    .data_mem__recv_waddr__msg1	(data_mem_recv_waddr_msg),
-    .data_mem__recv_waddr__rdy1	(data_mem_recv_waddr_rdy),
-    .data_mem__recv_wdata__en1	(data_mem_recv_wdata_en),
-    .data_mem__recv_wdata__msg1	(data_mem_recv_wdata_msg_internal),
-    .data_mem__recv_wdata__rdy1	(data_mem_recv_wdata_rdy),
+    .data_mem__recv_waddr__en	(data_mem_recv_waddr_en),
+    .data_mem__recv_waddr__msg	(data_mem_recv_waddr_msg),
+    .data_mem__recv_waddr__rdy	(data_mem_recv_waddr_rdy),
+    .data_mem__recv_wdata__en	(data_mem_recv_wdata_en),
+    .data_mem__recv_wdata__msg	(data_mem_recv_wdata_msg_internal),
+    .data_mem__recv_wdata__rdy	(data_mem_recv_wdata_rdy),
     //-------------------------------------------------------------
 
     //Reading from memory
     //-------------------------------------------------------------
-    .data_mem__recv_raddr__en1	(data_mem_recv_raddr_en),
-    .data_mem__recv_raddr__msg1	(data_mem_recv_raddr_msg),
-    .data_mem__recv_raddr__rdy1	(data_mem_recv_raddr_rdy),
-    .data_mem__send_rdata__en1	(data_mem_send_rdata_en),
-    .data_mem__send_rdata__msg1	(data_mem_send_rdata_msg_internal),
-    .data_mem__send_rdata__rdy1	(data_mem_send_rdata_rdy)
+    .data_mem__recv_raddr__en	(data_mem_recv_raddr_en),
+    .data_mem__recv_raddr__msg	(data_mem_recv_raddr_msg),
+    .data_mem__recv_raddr__rdy	(data_mem_recv_raddr_rdy),
+    .data_mem__send_rdata__en	(data_mem_send_rdata_en),
+    .data_mem__send_rdata__msg	(data_mem_send_rdata_msg_internal),
+    .data_mem__send_rdata__rdy	(data_mem_send_rdata_rdy)
     //-------------------------------------------------------------
 );
 
