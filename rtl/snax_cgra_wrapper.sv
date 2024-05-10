@@ -237,7 +237,26 @@ endgenerate
 //------------------------------------------
 // Acc assignments
 //------------------------------------------
+	
+/*always_comb begin: gen_hard_bundle
+        for(int i=0; i < SnaxTcdmPorts; i++) begin
 
+            snax_tcdm_req_o[i].q.write           = tcdm_req_write[i];
+            snax_tcdm_req_o[i].q.addr            = tcdm_req_addr[i];
+            // snax_tcdm_req_o[i].q.amo             = tcdm_req_amo_i[i];
+            snax_tcdm_req_o[i].q.amo             = AMONone;
+            snax_tcdm_req_o[i].q.data            = tcdm_req_data[i];
+            snax_tcdm_req_o[i].q.user.core_id    = tcdm_req_user_core_id[i];
+            snax_tcdm_req_o[i].q.user.is_core    = tcdm_req_user_is_core[i];
+            snax_tcdm_req_o[i].q.strb            = tcdm_req_strb[i];
+            snax_tcdm_req_o[i].q_valid           = tcdm_req_q_valid[i];
+
+            tcdm_rsp_q_ready[i]                = snax_tcdm_rsp_i[i].q_ready;
+            tcdm_rsp_p_valid[i]                = snax_tcdm_rsp_i[i].p_valid;
+            tcdm_rsp_data[i]                   = snax_tcdm_rsp_i[i].p.data;
+
+        end
+    end*/
 
 
 always_comb begin
@@ -283,25 +302,7 @@ always_comb begin
 		end
 	end
 
-	/*always_comb begin: gen_hard_bundle
-        for(int i=0; i < SnaxTcdmPorts; i++) begin
 
-            snax_tcdm_req_o[i].q.write           = tcdm_req_write[i];
-            snax_tcdm_req_o[i].q.addr            = tcdm_req_addr[i];
-            // snax_tcdm_req_o[i].q.amo             = tcdm_req_amo_i[i];
-            snax_tcdm_req_o[i].q.amo             = 0;
-            snax_tcdm_req_o[i].q.data            = tcdm_req_data[i];
-            snax_tcdm_req_o[i].q.user.core_id    = tcdm_req_user_core_id[i];
-            snax_tcdm_req_o[i].q.user.is_core    = tcdm_req_user_is_core[i];
-            snax_tcdm_req_o[i].q.strb            = tcdm_req_strb[i];
-            snax_tcdm_req_o[i].q_valid           = tcdm_req_q_valid[i];
-
-            tcdm_rsp_q_ready[i]                = snax_tcdm_rsp_i[i].q_ready;
-            tcdm_rsp_p_valid[i]                = snax_tcdm_rsp_i[i].p_valid;
-            tcdm_rsp_data[i]                   = snax_tcdm_rsp_i[i].p.data;
-
-        end
-    end*/
 
     assign snax_barrier_o = csr_req_ready_o;
 
