@@ -190,7 +190,7 @@ CGRARTL__e95cacd33b23104e#(
 .TCDMAddrWidth(AddrWidth)
 ) CGRARtl (
     .clk(clk_i),
-    .reset(rst_ni),
+    .reset(~rst_ni),
 
     // CSR 
     //-------------------------------------------------------------
