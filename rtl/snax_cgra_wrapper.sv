@@ -238,7 +238,7 @@ endgenerate
 // Acc assignments
 //------------------------------------------
 	
-/*always_comb begin: gen_hard_bundle
+always_comb begin: gen_hard_bundle
         for(int i=0; i < SnaxTcdmPorts; i++) begin
 
             snax_tcdm_req_o[i].q.write           = tcdm_req_write[i];
@@ -256,7 +256,7 @@ endgenerate
             tcdm_rsp_data[i]                   = snax_tcdm_rsp_i[i].p.data;
 
         end
-    end*/
+    end
 
 
 always_comb begin
