@@ -5897,24 +5897,24 @@ parameter int unsigned TCDMAddrWidth = 6
   
   //write to memory
   	//-------------------------------------------------------------
-  output logic [0:0] data_mem__recv_waddr__en1 [0:3],
+  output logic [0:0] data_mem__recv_waddr__en [0:3],
   // size of waddr = clog2(Population Data Size)
-  output logic [TCDMAddrWidth-1:0] data_mem__recv_waddr__msg1 [0:3],
-  input logic [0:0] data_mem__recv_waddr__rdy1 [0:3],
-  output logic [0:0] data_mem__recv_wdata__en1 [0:3],
-  output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__recv_wdata__msg1 [0:3],
-  input logic [0:0] data_mem__recv_wdata__rdy1 [0:3],
+  output logic [TCDMAddrWidth-1:0] data_mem__recv_waddr__msg [0:3],
+  input logic [0:0] data_mem__recv_waddr__rdy [0:3],
+  output logic [0:0] data_mem__recv_wdata__en [0:3],
+  output CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__recv_wdata__msg [0:3],
+  input logic [0:0] data_mem__recv_wdata__rdy [0:3],
   	//-------------------------------------------------------------
   	
   //Reading from memory
   	//-------------------------------------------------------------
-  output logic data_mem__recv_raddr__en1 [0:3],
+  output logic data_mem__recv_raddr__en [0:3],
   // size of raddr = clog2(Population Data Size)
-  output logic [TCDMAddrWidth-1:0] data_mem__recv_raddr__msg1 [0:3],
-  input logic data_mem__recv_raddr__rdy1 [0:3],
-  input logic data_mem__send_rdata__en1 [0:3],
-  input CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__send_rdata__msg1 [0:3],
-  output logic [0:0] data_mem__send_rdata__rdy1 [0:3]
+  output logic [TCDMAddrWidth-1:0] data_mem__recv_raddr__msg [0:3],
+  input logic data_mem__recv_raddr__rdy [0:3],
+  input logic data_mem__send_rdata__en [0:3],
+  input CGRAData_16_1_1__payload_16__predicate_1__bypass_1 data_mem__send_rdata__msg [0:3],
+  output logic [0:0] data_mem__send_rdata__rdy [0:3]
   	//-------------------------------------------------------------
   //-------------------------------------------------------------
   
@@ -5923,7 +5923,7 @@ parameter int unsigned TCDMAddrWidth = 6
   // Component data_mem
   //-------------------------------------------------------------
 
-  
+  /*
   logic [0:0] data_mem__clk;
   logic [0:0] data_mem__reset;
   logic [0:0] data_mem__recv_raddr__en [0:3];
@@ -5956,6 +5956,7 @@ parameter int unsigned TCDMAddrWidth = 6
     .send_rdata__msg( data_mem__send_rdata__msg ),
     .send_rdata__rdy( data_mem__send_rdata__rdy )
   );
+  */
   
   //-------------------------------------------------------------
   // End of component data_mem
