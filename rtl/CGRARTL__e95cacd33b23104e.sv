@@ -39,7 +39,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //     s.rdata[i] @= s.regs[ s.raddr[i] ]
   
   always_comb begin : up_rf_read
-    for ( int unsigned i = 1; i < 3'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
       rdata[2'(i)] = regs[raddr[2'(i)]];
   end
 
@@ -52,7 +52,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //       s.regs[ s.waddr[i] ] <<= s.wdata[i]
   
   always_ff @(posedge clk) begin : up_rf_write
-    for ( int unsigned i = 1; i < 4'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 4'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
       if ( wen[3'(i)] ) begin
         regs[waddr[3'(i)]] <= wdata[3'(i)];
       end
@@ -141,7 +141,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //       s.reg_file.wen[i]   @= s.recv_wdata[i].en & s.recv_waddr[i].en
   
   always_comb begin : update_read_with_init
-    for ( int unsigned i = 1; i < 3'( __const__rd_ports_at_update_read_with_init ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 3'( __const__rd_ports_at_update_read_with_init ); i += 1'd1 ) begin
       reg_file__wen[3'( __const__wr_ports_at_update_read_with_init ) + 3'(i)] = 1'd0;
       if ( initWrites[recv_raddr__msg[2'(i)]] == 1'd0 ) begin
         send_rdata__msg[2'(i)] = preloadData[recv_raddr__msg[2'(i)]];
@@ -154,7 +154,7 @@ parameter int unsigned TCDMAddrWidth = 6
         send_rdata__msg[2'(i)] = reg_file__rdata[2'(i)];
       end
     end
-    for ( int unsigned i = 1; i < 3'( __const__wr_ports_at_update_read_with_init ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__wr_ports_at_update_read_with_init ); i += 1'd1 )
       if ( recv_waddr__en[2'(i)] == 1'd1 ) begin
         reg_file__waddr[3'(i)] = recv_waddr__msg[2'(i)];
         reg_file__wdata[3'(i)] = recv_wdata__msg[2'(i)];
@@ -176,11 +176,11 @@ parameter int unsigned TCDMAddrWidth = 6
   //     s.recv_wdata[i].rdy @= Bits1( 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned i = 1; i < 3'( __const__rd_ports_at_update_signal ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 3'( __const__rd_ports_at_update_signal ); i += 1'd1 ) begin
       recv_raddr__rdy[2'(i)] = send_rdata__rdy[2'(i)];
       send_rdata__en[2'(i)] = recv_raddr__en[2'(i)];
     end
-    for ( int unsigned i = 1; i < 3'( __const__wr_ports_at_update_signal ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 3'( __const__wr_ports_at_update_signal ); i += 1'd1 ) begin
       recv_waddr__rdy[2'(i)] = 1'd1;
       recv_wdata__rdy[2'(i)] = 1'd1;
     end
@@ -198,11 +198,11 @@ parameter int unsigned TCDMAddrWidth = 6
   //       s.initWrites[s.recv_waddr[i].msg] <<= s.initWrites[s.recv_waddr[i].msg] | b1(1)
   
   always_ff @(posedge clk) begin : update_init
-    for ( int unsigned i = 1; i < 3'( __const__rd_ports_at_update_init ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__rd_ports_at_update_init ); i += 1'd1 )
       if ( recv_raddr__en[2'(i)] == 1'd1 ) begin
         initWrites[recv_raddr__msg[2'(i)]] <= initWrites[recv_raddr__msg[2'(i)]] | 1'd1;
       end
-    for ( int unsigned i = 1; i < 3'( __const__wr_ports_at_update_init ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__wr_ports_at_update_init ); i += 1'd1 )
       if ( recv_waddr__en[2'(i)] == 1'd1 ) begin
         initWrites[recv_waddr__msg[2'(i)]] <= initWrites[recv_waddr__msg[2'(i)]] | 1'd1;
       end
@@ -614,7 +614,7 @@ module RegisterFile__ff473bd3ce489042
   //     s.rdata[i] @= s.regs[ s.raddr[i] ]
   
   always_comb begin : up_rf_read
-    for ( int unsigned i = 1; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
       rdata[1'(i)] = regs[raddr[1'(i)]];
   end
 
@@ -627,7 +627,7 @@ module RegisterFile__ff473bd3ce489042
   //       s.regs[ s.waddr[i] ] <<= s.wdata[i]
   
   always_ff @(posedge clk) begin : up_rf_write
-    for ( int unsigned i = 1; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
       if ( wen[1'(i)] ) begin
         regs[waddr[1'(i)]] <= wdata[1'(i)];
       end
@@ -891,7 +891,7 @@ module ChannelRTL__b3d10fbae4900e6b
   //     s.bypass_q.deq_en    @= s.send.rdy & s.bypass_q.deq_rdy
   
   always_comb begin : process
-    for ( int unsigned i = 1; i < 1'd1 - 1'd1; i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 1'd1 - 1'd1; i += 1'd1 ) begin
       queues__enq_msg[1'(i) + 1'd1] = queues__deq_msg[1'(i)];
       queues__enq_en[1'(i) + 1'd1] = queues__deq_rdy[1'(i)] & queues__enq_rdy[1'(i) + 1'd1];
       queues__deq_en[1'(i)] = queues__enq_en[1'(i) + 1'd1];
@@ -1094,9 +1094,9 @@ module CrossbarRTL__27570a81c91409e5
     in_dir_local = 3'd0;
     send_predicate__en = 1'd0;
     send_predicate__msg = { 1'd0, 1'd0 };
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_update_signal ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_update_signal ); i += 1'd1 )
       recv_data__rdy[3'(i)] = 1'd0;
-    for ( int unsigned i = 1; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 ) begin
       send_data__en[3'(i)] = 1'd0;
       send_data__msg[3'(i)] = { 16'd0, 1'd0, 1'd0 };
     end
@@ -1104,13 +1104,13 @@ module CrossbarRTL__27570a81c91409e5
       send_predicate__msg = { 1'd0, 1'd0 };
     end
     if ( recv_opt__msg.ctrl != 6'( __const__OPT_START ) ) begin
-      for ( int unsigned i = 1; i < 3'( __const__num_inports_at_update_signal ); i += 1'd1 )
+      for ( int unsigned i = 0; i < 3'( __const__num_inports_at_update_signal ); i += 1'd1 )
         if ( recv_opt__msg.predicate_in[3'(i)] & recv_data__en[3'(i)] ) begin
           send_predicate__en = 1'd1;
           send_predicate__msg.payload = 1'd1;
           send_predicate__msg.predicate = send_predicate__msg.predicate | recv_data__msg[3'(i)].predicate;
         end
-      for ( int unsigned i = 1; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 ) begin
+      for ( int unsigned i = 0; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 ) begin
         in_dir = recv_opt__msg.outport[3'(i)];
         out_rdy_vector[3'(i)] = send_data__rdy[3'(i)];
         if ( ( in_dir > 3'd0 ) & send_data__rdy[3'(i)] ) begin
@@ -1133,7 +1133,7 @@ module CrossbarRTL__27570a81c91409e5
       end
     end
     else
-      for ( int unsigned i = 1; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 )
+      for ( int unsigned i = 0; i < 4'( __const__num_outports_at_update_signal ); i += 1'd1 )
         send_data__en[3'(i)] = 1'd0;
     recv_opt__rdy = ( | out_rdy_vector );
   end
@@ -1167,7 +1167,7 @@ module RegisterFile__f71aee70bc8be3e5
   //     s.rdata[i] @= s.regs[ s.raddr[i] ]
   
   always_comb begin : up_rf_read
-    for ( int unsigned i = 1; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
       rdata[1'(i)] = regs[raddr[1'(i)]];
   end
 
@@ -1180,7 +1180,7 @@ module RegisterFile__f71aee70bc8be3e5
   //       s.regs[ s.waddr[i] ] <<= s.wdata[i]
   
   always_ff @(posedge clk) begin : up_rf_write
-    for ( int unsigned i = 1; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
       if ( wen[1'(i)] ) begin
         regs[waddr[1'(i)]] <= wdata[1'(i)];
       end
@@ -1444,9 +1444,9 @@ parameter int unsigned TCDMAddrWidth = 6
   always_comb begin : comb_logic
     in0 = 3'd0;
     in1 = 3'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
-    for ( int unsigned i = 1; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
       send_out__en[1'(i)] = recv_opt__en;
       send_out__msg[1'(i)] = { 16'd0, 1'd0, 1'd0 };
     end
@@ -1501,7 +1501,7 @@ parameter int unsigned TCDMAddrWidth = 6
       end
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( recv_opt__msg.predicate == 1'd1 ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -1548,7 +1548,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //                       ( s.latency == latency - 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
     recv_opt__rdy = ( ( recv_opt__msg.ctrl == 6'( __const__OPT_NAH ) ) | ( | recv_rdy_vector ) ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
@@ -1711,9 +1711,9 @@ parameter int unsigned TCDMAddrWidth = 6
     in0 = 3'd0;
     in1 = 3'd0;
     recv_predicate__rdy = 1'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
-    for ( int unsigned i = 1; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
       send_out__en[1'(i)] = recv_opt__en;
       send_out__msg[1'(i)] = { 16'd0, 1'd0, 1'd0 };
     end
@@ -1763,7 +1763,7 @@ parameter int unsigned TCDMAddrWidth = 6
       send_out__msg[1'd0].predicate = recv_in__msg[in0_idx].predicate;
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( recv_opt__msg.predicate == 1'd1 ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -1805,7 +1805,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //                       ( s.latency == latency - 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
     recv_opt__rdy = ( ( recv_opt__msg.ctrl == 6'( __const__OPT_NAH ) ) | ( | recv_rdy_vector ) ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
@@ -1969,7 +1969,7 @@ parameter int unsigned TCDMAddrWidth = 6
   always_comb begin : read_reg
     in0 = 3'd0;
     in1 = 3'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_read_reg ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_read_reg ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
     recv_predicate__rdy = 1'd0;
     if ( recv_opt__en ) begin
@@ -1987,7 +1987,7 @@ parameter int unsigned TCDMAddrWidth = 6
     end
     __tmpvar__read_reg_predicate = recv_in__msg[in0_idx].predicate & recv_in__msg[in1_idx].predicate;
     send_out__msg[1'd0] = const_one;
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_read_reg ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_read_reg ); j += 1'd1 )
       send_out__en[1'(j)] = recv_opt__en;
     if ( recv_opt__msg.ctrl == 6'( __const__OPT_EQ ) ) begin
       if ( recv_in__msg[in0_idx].payload == recv_in__msg[in1_idx].payload ) begin
@@ -2029,7 +2029,7 @@ parameter int unsigned TCDMAddrWidth = 6
       end
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_read_reg ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_read_reg ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( recv_opt__msg.predicate == 1'd1 ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -2071,7 +2071,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //                       ( s.latency == latency - 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
     recv_opt__rdy = ( ( recv_opt__msg.ctrl == 6'( __const__OPT_NAH ) ) | ( | recv_rdy_vector ) ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
@@ -2218,9 +2218,9 @@ parameter int unsigned TCDMAddrWidth = 6
   always_comb begin : comb_logic
     in0 = 3'd0;
     in1 = 3'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
-    for ( int unsigned i = 1; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
       send_out__en[1'(i)] = recv_opt__en;
       send_out__msg[1'(i)] = { 16'd0, 1'd0, 1'd0 };
     end
@@ -2260,7 +2260,7 @@ parameter int unsigned TCDMAddrWidth = 6
       send_out__msg[1'd0].predicate = recv_in__msg[in0_idx].predicate;
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( recv_opt__msg.predicate == 1'd1 ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -2302,7 +2302,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //                       ( s.latency == latency - 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
     recv_opt__rdy = ( ( recv_opt__msg.ctrl == 6'( __const__OPT_NAH ) ) | ( | recv_rdy_vector ) ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
@@ -2450,9 +2450,9 @@ parameter int unsigned TCDMAddrWidth = 6
   
   always_comb begin : comb_logic
     in0 = 3'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
-    for ( int unsigned i = 1; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 2'( __const__num_outports_at_comb_logic ); i += 1'd1 ) begin
       send_out__en[1'(i)] = recv_opt__en;
       send_out__msg[1'(i)] = { 16'd0, 1'd0, 1'd0 };
     end
@@ -2491,7 +2491,7 @@ parameter int unsigned TCDMAddrWidth = 6
       end
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( ( recv_opt__msg.predicate == 1'd1 ) & ( recv_opt__msg.ctrl != 6'( __const__OPT_BRH_START ) ) ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -2534,7 +2534,7 @@ parameter int unsigned TCDMAddrWidth = 6
   //                       ( s.latency == latency - 1 )
   
   always_comb begin : update_signal
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_update_signal ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
     recv_opt__rdy = ( ( recv_opt__msg.ctrl == 6'( __const__OPT_NAH ) ) | ( | recv_rdy_vector ) ) & ( latency == ( 1'( __const__latency_at_update_signal ) - 1'd1 ) );
@@ -2742,7 +2742,7 @@ parameter int unsigned TCDMAddrWidth = 6
   always_comb begin : comb_logic
     in0 = 3'd0;
     in1 = 3'd0;
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in__rdy[2'(i)] = 1'd0;
     recv_predicate__rdy = 1'd0;
     if ( recv_opt__en ) begin
@@ -2758,13 +2758,13 @@ parameter int unsigned TCDMAddrWidth = 6
         recv_predicate__rdy = 1'd1;
       end
     end
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
       recv_rdy_vector[1'(j)] = send_out__rdy[1'(j)];
     recv_const__rdy = ( | recv_rdy_vector );
     recv_opt__rdy = ( | recv_rdy_vector );
-    for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
       recv_in_en_vector[2'(i)] = recv_in__en[2'(i)];
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
       send_out__en[1'(j)] = recv_opt__en & ( | recv_in_en_vector );
     send_out__msg[1'd0] = from_mem_rdata__msg;
     to_mem_waddr__en = 1'd0;
@@ -2785,7 +2785,7 @@ parameter int unsigned TCDMAddrWidth = 6
       send_out__msg[1'd0].predicate = recv_in__msg[in0_idx].predicate;
     end
     else if ( recv_opt__msg.ctrl == 6'( __const__OPT_LD_CONST ) ) begin
-      for ( int unsigned i = 1; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
+      for ( int unsigned i = 0; i < 3'( __const__num_inports_at_comb_logic ); i += 1'd1 )
         recv_in__rdy[2'(i)] = 1'd0;
       recv_const__rdy = to_mem_raddr__rdy;
       to_mem_raddr__msg = 7'( recv_const__msg.payload[4'd6:4'd0] );
@@ -2813,7 +2813,7 @@ parameter int unsigned TCDMAddrWidth = 6
       end
     end
     else
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 )
         send_out__en[1'(j)] = 1'd0;
     if ( recv_opt__msg.predicate == 1'd1 ) begin
       send_out__msg[1'd0].predicate = send_out__msg[1'd0].predicate & recv_predicate__msg.predicate;
@@ -3177,15 +3177,15 @@ parameter int unsigned TCDMAddrWidth = 6
   //     s.recv_in[port].rdy @= reduce_or( s.fu_recv_in_rdy_vector[port] )
   
   always_comb begin : comb_logic
-    for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 ) begin
+    for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 ) begin
       send_out__en[1'(j)] = 1'd0;
       send_out__msg[1'(j)] = { 16'd0, 1'd0, 1'd0 };
     end
-    for ( int unsigned i = 1; i < 3'd6; i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 3'd6; i += 1'd1 ) begin
       fu__recv_const__msg[3'(i)] = recv_const__msg;
       fu__recv_const__en[3'(i)] = recv_const__en;
       fu_recv_const_rdy_vector[3'(i)] = fu__recv_const__rdy[3'(i)];
-      for ( int unsigned j = 1; j < 3'( __const__num_inports_at_comb_logic ); j += 1'd1 )
+      for ( int unsigned j= 0; j < 3'( __const__num_inports_at_comb_logic ); j += 1'd1 )
         fu__recv_in_count[3'(i)][2'(j)] = recv_in_count[2'(j)];
       fu__recv_opt__msg[3'(i)] = recv_opt__msg;
       fu__recv_opt__en[3'(i)] = recv_opt__en;
@@ -3194,7 +3194,7 @@ parameter int unsigned TCDMAddrWidth = 6
       fu__recv_predicate__en[3'(i)] = recv_predicate__en;
       fu_recv_predicate_rdy_vector[3'(i)] = fu__recv_predicate__rdy[3'(i)];
       fu__recv_predicate__msg[3'(i)] = recv_predicate__msg;
-      for ( int unsigned j = 1; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 ) begin
+      for ( int unsigned j= 0; j < 2'( __const__num_outports_at_comb_logic ); j += 1'd1 ) begin
         if ( fu__send_out__en[3'(i)][1'(j)] ) begin
           send_out__msg[1'(j)] = fu__send_out__msg[3'(i)][1'(j)];
           send_out__en[1'(j)] = fu__send_out__en[3'(i)][1'(j)];
@@ -3205,10 +3205,10 @@ parameter int unsigned TCDMAddrWidth = 6
     recv_const__rdy = ( | fu_recv_const_rdy_vector );
     recv_predicate__rdy = ( | fu_recv_predicate_rdy_vector );
     recv_opt__rdy = ( | fu_recv_opt_rdy_vector );
-    for ( int unsigned j = 1; j < 3'( __const__num_inports_at_comb_logic ); j += 1'd1 )
+    for ( int unsigned j= 0; j < 3'( __const__num_inports_at_comb_logic ); j += 1'd1 )
       recv_in__rdy[2'(j)] = 1'd0;
     for ( int unsigned port = 1'd0; port < 3'( __const__num_inports_at_comb_logic ); port += 1'd1 ) begin
-      for ( int unsigned i = 1; i < 3'd6; i += 1'd1 ) begin
+      for ( int unsigned i = 0; i < 3'd6; i += 1'd1 ) begin
         fu__recv_in__msg[3'(i)][2'(port)] = recv_in__msg[2'(port)];
         fu__recv_in__en[3'(i)][2'(port)] = recv_in__en[2'(port)];
         fu_recv_in_rdy_vector[2'(port)][3'(i)] = fu__recv_in__rdy[3'(i)][2'(port)];
@@ -3331,7 +3331,7 @@ module RegisterFile__351680845b4f9dfa
   //     s.rdata[i] @= s.regs[ s.raddr[i] ]
   
   always_comb begin : up_rf_read
-    for ( int unsigned i = 1; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__rd_ports_at_up_rf_read ); i += 1'd1 )
       rdata[1'(i)] = regs[raddr[1'(i)]];
   end
 
@@ -3344,7 +3344,7 @@ module RegisterFile__351680845b4f9dfa
   //       s.regs[ s.waddr[i] ] <<= s.wdata[i]
   
   always_ff @(posedge clk) begin : up_rf_write
-    for ( int unsigned i = 1; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
+    for ( int unsigned i = 0; i < 1'( __const__wr_ports_at_up_rf_write ); i += 1'd1 )
       if ( wen[1'(i)] ) begin
         regs[waddr[1'(i)]] <= wdata[1'(i)];
       end
@@ -3565,7 +3565,7 @@ module RegisterRTL__e306da7100516ae4
     recv__rdy = queues__enq_rdy[1'd0];
     queues__enq_msg[1'd0] = recv__msg;
     queues__enq_en[1'd0] = recv__en & queues__enq_rdy[1'd0];
-    for ( int unsigned i = 1; i < 1'd1 - 1'd1; i += 1'd1 ) begin
+    for ( int unsigned i = 0; i < 1'd1 - 1'd1; i += 1'd1 ) begin
       queues__enq_msg[1'(i) + 1'd1] = queues__deq_msg[1'(i)];
       queues__enq_en[1'(i) + 1'd1] = queues__deq_rdy[1'(i)] & queues__enq_rdy[1'(i) + 1'd1];
       queues__deq_en[1'(i)] = queues__enq_en[1'(i) + 1'd1];
