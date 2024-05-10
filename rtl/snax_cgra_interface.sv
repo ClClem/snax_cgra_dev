@@ -38,27 +38,56 @@ module snax_cgra_interface #(
 
     // req
     logic                                  write_csr;
-
+    logic                                  write_en;
+    logic [31:0]    input_buffer;
+    logic           counter;
     always_comb begin
         if (!rst_ni) begin
             write_csr = 1'b0;
+            io_csr_req_bits_data_i = 0;
+            write_en = 1'b0;
         end else if (snax_qvalid_i) begin
             unique casez (snax_req_i.data_op)
                 CSRRS, CSRRSI, CSRRC, CSRRCI: begin
                     write_csr = 1'b0;
+                    io_csr_req_bits_data_i = 0;
+                    write_en = 1'b0;
                 end
                 default: begin
                     write_csr = 1'b1;
+                    if(counter) begin
+                        io_csr_req_bits_data_i =  (snax_req_i.data_arga << 32) + input_buffer;
+                        write_en = 1'b1;
+                    end else begin
+                       io_csr_req_bits_data_i = 0;
+                       write_en = 1'b0;
+                    end
                 end
             endcase
         end else begin
             write_csr = 1'b0;
+            io_csr_req_bits_data_i = 0;
+            write_en = 1'b0;
         end
     end
 
-    assign io_csr_req_bits_data_i = snax_req_i.data_arga;
+    always_ff @(posedge clk_i or negedge rst_ni) begin
+        if(!rst_ni) begin
+            input_buffer <= 0;
+            counter <= 0;
+        end
+        else
+            if(write_csr) begin
+                input_buffer <= snax_req_i.data_arga;
+                counter++;
+            end
+            
+    end
+
+
+    //assign io_csr_req_bits_data_i = snax_req_i.data_arga;
     assign io_csr_req_bits_addr_i = snax_req_i.data_argb - CsrAddrOFfset;
-    assign io_csr_req_bits_write_i = write_csr;
+    assign io_csr_req_bits_write_i = write_en;
     assign io_csr_req_valid_i = snax_qvalid_i;
     assign snax_qready_o = io_csr_req_ready_o;
 
