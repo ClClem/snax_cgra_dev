@@ -208,7 +208,7 @@ parameter int unsigned TCDMAddrWidth = 6
       end
   end
 
-  assign reg_file__clk = clk;
+  /*assign reg_file__clk = clk;
   assign reg_file__reset = reset;
   assign preloadData[0] = { 16'd0, 1'd1, 1'd0 };
   assign preloadData[1] = { 16'd1, 1'd1, 1'd0 };
@@ -309,7 +309,7 @@ parameter int unsigned TCDMAddrWidth = 6
   assign preloadData[96] = { 16'd96, 1'd1, 1'd0 };
   assign preloadData[97] = { 16'd97, 1'd1, 1'd0 };
   assign preloadData[98] = { 16'd98, 1'd1, 1'd0 };
-  assign preloadData[99] = { 16'd99, 1'd1, 1'd0 };
+  assign preloadData[99] = { 16'd99, 1'd1, 1'd0 };*/
 
 endmodule
 
