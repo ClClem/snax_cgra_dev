@@ -3080,7 +3080,7 @@ parameter int unsigned TCDMAddrWidth = 6
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[4] )
   );
 
-  MemUnitRTL__f8a032dec339975b #(
+  /*MemUnitRTL__f8a032dec339975b #(
 .TCDMAddrWidth(TCDMAddrWidth)
 ) fu__5  (
     .clk( fu__clk[5] ),
@@ -3113,7 +3113,7 @@ parameter int unsigned TCDMAddrWidth = 6
     .to_mem_wdata__en( fu__to_mem_wdata__en[5] ),
     .to_mem_wdata__msg( fu__to_mem_wdata__msg[5] ),
     .to_mem_wdata__rdy( fu__to_mem_wdata__rdy[5] )
-  );
+  );*/
 
   //-------------------------------------------------------------
   // End of component fu[0:5]
